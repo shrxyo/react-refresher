@@ -17,9 +17,15 @@
 
 // export default ListGroup;
 
+import { MouseEvent } from "react";
+
 function ListGroup() {
   let items = ["Mumbai", "Hyderabad", "Bangalore", "Chennai", "Kolkata"];
   // items = [];
+  let selectedIndex = 0;
+
+  //Event Handler
+  const handleClick = (event: MouseEvent) => console.log(event);
 
   //created a function to add the conditions.
   const getMessage = () => {
@@ -44,8 +50,17 @@ function ListGroup() {
       <h1>List Group</h1>
       {getMessage()}
       <ul className="list-group">
-        {items.map((item) => (
-          <li className="list-group-item" key={item}>
+        {items.map((item, index) => (
+          // We are not calling "handleClick" function. We are just referencing it.
+          <li
+            className={
+              selectedIndex === index
+                ? "list-group-item active"
+                : "list-group-item"
+            }
+            onClick={handleClick}
+            key={item}
+          >
             {item}
           </li>
         ))}
@@ -55,3 +70,5 @@ function ListGroup() {
 }
 
 export default ListGroup;
+
+//active: used to highlight hovered items in bootstrap. We need a variable to keep track of the index of the selected item
